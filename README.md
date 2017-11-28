@@ -2,8 +2,48 @@
 > Git 是一个分布式版本控制软件，它采用了分布式版本库的作法，不需要服务器端软件，就可以运作版本控制，使得源代码的发布和交流极其方便，最初由林纳斯·托瓦兹（Linus Torvalds）创作，于2005年以GPL发布。 ——[维基百科](https://zh.wikipedia.org/wiki/Git)
 
 ---------
-[TOC]
+<!-- MarkdownTOC -->
+
+- [一、  Git安装及配置][%E4%B8%80%E3%80%81--git%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE]
+    - [1.  安装][1--%E5%AE%89%E8%A3%85]
+    - [2.  初始配置][2--%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE]
+- [二、  搭建GIT服务器][%E4%BA%8C%E3%80%81--%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8]
+    - [1.  生成SSH公钥][1--%E7%94%9F%E6%88%90ssh%E5%85%AC%E9%92%A5]
+    - [2.  配置服务器][2--%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8]
+- [三、  远程仓库][%E4%B8%89%E3%80%81--%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93]
+    - [1.  查看远程仓库][1--%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93]
+    - [2.  添加远程仓库][2--%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93]
+    - [3.  从远程仓库中拉取][3--%E4%BB%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%AD%E6%8B%89%E5%8F%96]
+    - [4.  推送到远程仓库][4--%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93]
+    - [5.  远程仓库的移除和重命名][5--%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E7%A7%BB%E9%99%A4%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D]
+    - [6.  修改远程仓库的地址][6--%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%9C%B0%E5%9D%80]
+- [四、  Git版本库基本操作][%E5%9B%9B%E3%80%81--git%E7%89%88%E6%9C%AC%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C]
+    - [1.  添加与提交][1--%E6%B7%BB%E5%8A%A0%E4%B8%8E%E6%8F%90%E4%BA%A4]
+    - [2.  查看提交历史][2--%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2]
+    - [3.  查看文件差异][3--%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%B7%AE%E5%BC%82]
+    - [4.  撤销操作][4--%E6%92%A4%E9%94%80%E6%93%8D%E4%BD%9C]
+    - [5.  版本回退][5--%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80]
+- [五、  Git分支管理][%E4%BA%94%E3%80%81--git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86]
+    - [1.  分支的新建与合并][1--%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6]
+    - [2.  解决冲突][2--%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81]
+    - [3.  分支管理][3--%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86]
+    - [4.  分支开发工作流][4--%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81]
+- [六、  Git标签管理][%E5%85%AD%E3%80%81--git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86]
+    - [1.  创建标签][1--%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE]
+    - [2.  删除标签][2--%E5%88%A0%E9%99%A4%E6%A0%87%E7%AD%BE]
+    - [3.  推送标签][3--%E6%8E%A8%E9%80%81%E6%A0%87%E7%AD%BE]
+- [七、  自定义Git][%E4%B8%83%E3%80%81--%E8%87%AA%E5%AE%9A%E4%B9%89git]
+    - [1.  忽略特定文件][1--%E5%BF%BD%E7%95%A5%E7%89%B9%E5%AE%9A%E6%96%87%E4%BB%B6]
+- [八、  常见问题分析][%E5%85%AB%E3%80%81--%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90]
+    - [1.  换行符转换问题][1--%E6%8D%A2%E8%A1%8C%E7%AC%A6%E8%BD%AC%E6%8D%A2%E9%97%AE%E9%A2%98]
+    - [2.  拉取远程分支时报错][2--%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%97%B6%E6%8A%A5%E9%94%99]
+    - [3.  Win下bash速度变慢][3--win%E4%B8%8Bbash%E9%80%9F%E5%BA%A6%E5%8F%98%E6%85%A2]
+
+<!-- /MarkdownTOC -->
+
+<a name="%E4%B8%80%E3%80%81--git%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE"></a>
 ### 一、  Git安装及配置
+<a name="1--%E5%AE%89%E8%A3%85"></a>
 #### 1.  安装
 ##### 1)  Linux下安装
 ```bash
@@ -11,6 +51,7 @@ $ sudo yum git
 ```
 ##### 2)  Windows下安装
 [Git for Windows](https://git-scm.com/download/win)
+<a name="2--%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"></a>
 #### 2.  初始配置
 ##### 1)  基础配置
 ```bash
@@ -56,8 +97,10 @@ Windows下配置文件一般在用户数据目录，如C:\Users\qiaozq，名为.
 
 > **Note: Git versions older than 2.2.0 (git --version) use "bc3" as the keyword for BC4. For Git 2.2.0+, use "bc".**
 
+<a name="%E4%BA%8C%E3%80%81--%E6%90%AD%E5%BB%BAgit%E6%9C%8D%E5%8A%A1%E5%99%A8"></a>
 ### 二、  搭建GIT服务器
 远程git服务器可以用来协作，也可以用来过渡或者作为远程备份。以下是在centos系统中搭建git服务器的步骤：
+<a name="1--%E7%94%9F%E6%88%90ssh%E5%85%AC%E9%92%A5"></a>
 #### 1.  生成SSH公钥
 Git服务器使用SSH公钥进行认证，Git服务器中保存可以访问服务器的用户的公钥列表，其他git用户可在将自己的公钥文件（一般是id_dsa.pub）中的内容加入到服务器的授权文件中（authorized_keys），该用户即可访问Git服务器，push/pull内容。
 ```c
@@ -75,6 +118,7 @@ Your public key has been saved in /home/schacon/.ssh/id_rsa.pub.
 The key fingerprint is:
 d0:82:24:8e:d7:f1:bb:9b:33:53:96:93:49:da:9b:e3 schacon@mylaptop.local
 ```
+<a name="2--%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8"></a>
 #### 2.  配置服务器
 ##### 1)  创建用户及目录
 ```c
@@ -114,22 +158,27 @@ $ git push origin master    //将本地master分支最新修改推送到远程�
 $ git clone git@192.168.94.117:/home/git/hsiar.git
 ```
 
+<a name="%E4%B8%89%E3%80%81--%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"></a>
 ### 三、  远程仓库
+<a name="1--%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"></a>
 #### 1.  查看远程仓库
 ```c
 $ git remote -v
 $ git remote show origin    //查看远程仓库origin的详细信息
 $ git branch -r             //查看远程仓库有哪些分支
 ```
+<a name="2--%E6%B7%BB%E5%8A%A0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"></a>
 #### 2.  添加远程仓库
 ```c
 $ git remote add <shortname> <url>
 ```
+<a name="3--%E4%BB%8E%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%AD%E6%8B%89%E5%8F%96"></a>
 #### 3.  从远程仓库中拉取
 ```c
 $ git fetch [remote-name]       //抓取但不合并
 $ git pull [remote-name]        //抓取并合并
 ```
+<a name="4--%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"></a>
 #### 4.  推送到远程仓库
 ```c
 $ git push [remote-name] [branch-name]  //将当前branch-name分支推送到远程仓库remote-name
@@ -137,11 +186,13 @@ $ git push origin master        //master分支推送到远程仓库
 $ git push origin dev           //dev分支推送到远程仓库
 $ git push -f origin feature01  //如果feature01使用--amend参数重写过，那么使用-f参数强制覆盖远程版本
 ```
+<a name="5--%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E7%A7%BB%E9%99%A4%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D"></a>
 #### 5.  远程仓库的移除和重命名
 ```c
 $ git remote rename org_name new_name       //重命名
 $ git remote rm name                            //删除
 ```
+<a name="6--%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%9C%B0%E5%9D%80"></a>
 #### 6.  修改远程仓库的地址
 - 直接重置地址
 ```c
@@ -154,7 +205,9 @@ $ git remote add origin git@new_ip:/home/git/hsiar_source.git
 ```
 > **注意：修改后分支的对应关系可能改变，需要重新建立连接，按照提示操作即可。**
 
+<a name="%E5%9B%9B%E3%80%81--git%E7%89%88%E6%9C%AC%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"></a>
 ### 四、  Git版本库基本操作
+<a name="1--%E6%B7%BB%E5%8A%A0%E4%B8%8E%E6%8F%90%E4%BA%A4"></a>
 #### 1.  添加与提交
 ```c
 $ git add *                     //添加所有文件，加入跟踪
@@ -167,6 +220,7 @@ $ git status -s                 //紧凑格式输出当前状态
 $ git rm file                   //移除文件
 $ git mv file_from file_to      //移动文件
 ```
+<a name="2--%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"></a>
 #### 2.  查看提交历史
 ```c
 $ git lg filename           //查看单个文件的历史
@@ -180,6 +234,7 @@ $ git log --since=1.week.ago                //一周之内的所有log
 $ git log --since=1.month.ago --until=2.weeks.ago   //一个月之前到半个月之前的所有log
 $ git log --since=2016-06-01 --until=2016-06-06 //某个时间段的log
 ```
+<a name="3--%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%B7%AE%E5%BC%82"></a>
 #### 3.  查看文件差异
 ```c
 $ git difftool  //比较工作目录与暂存区的差别
@@ -192,6 +247,7 @@ $ git difftool commit_id    //比较某个历史版本和当前工作区的差�
 $ git difftool HEAD     //比较工作区和上次提交的差异
 $ git diff --name-status commit_id1 commit_id2  //查看两个版本修改的文件列表及文件的增删改状态
 ```
+<a name="4--%E6%92%A4%E9%94%80%E6%93%8D%E4%BD%9C"></a>
 #### 4.  撤销操作
 ```c
 $ git commit --amend        //如果忘了暂存某些修改，该命令可将该文件添加到上一次的提交中，如果没有修改，则会启动编辑器编辑上一次的提交说明
@@ -199,13 +255,16 @@ $ git reset HEAD <file> //取消暂存
 $ git checkout -- [file]        //撤销还未提交的修改
 $ git ls-files -d | xargs -i git checkout {}    //恢复误删除的文件
 ```
+<a name="5--%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"></a>
 #### 5.  版本回退
 ```c
 $ git reset --hard HEAD^            //回退到上一个版本
 $ git reset --hard <commit_id>  //回退到某个特定的版本，commit_id可通过git reflog查看，即使回退到了某一个版本，在log中无法查新于该版本的commit id，也可以通过reflog查看
 $ git reset --soft HEAD^        //将最近一次的提交回退到暂存区
 ```
+<a name="%E4%BA%94%E3%80%81--git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"></a>
 ### 五、  Git分支管理
+<a name="1--%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6"></a>
 #### 1.  分支的新建与合并
 ```c
 $ git branch                //查看分支
@@ -221,15 +280,18 @@ $ git branch -D name        //强制删除分支
 $git co --patch branch plugins/xxx/file.c  //merge单个文件
 //将branch分支中的file.c文件单独合并到当前分支，选择’a’确认，然后提交
 ```
+<a name="2--%E8%A7%A3%E5%86%B3%E5%86%B2%E7%AA%81"></a>
 #### 2.  解决冲突
 ```c
 $ git mergetool     //如果有冲突，该命令会调用指定的merge tool，合并完成后add并提交
 ```
+<a name="3--%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"></a>
 #### 3.  分支管理
 ```
 $ git branch --merge            //查看哪些分支已合并到当前分支
 $ git branch --no-merged        //查看所有包含未合并工作的分支
 ```
+<a name="4--%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B7%A5%E4%BD%9C%E6%B5%81"></a>
 #### 4.  分支开发工作流
 ##### 1)  Bug分支，暂存工作状态
 如果在某个分支上开发到一半，需要紧急修复bug，新建分支后修改的内容还在，所以需要先储藏而使得工作区干净，此时可以使用stash命令。
@@ -252,7 +314,9 @@ $ git branch --set-upstream branch-name origin/branch-name
 $git push origin --delete branch-name
 //删除远程分支
 ```
+<a name="%E5%85%AD%E3%80%81--git%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"></a>
 ### 六、  Git标签管理
+<a name="1--%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"></a>
 #### 1.  创建标签
 ```c
 $ git tag v1.0      //在最新的commit上打标签
@@ -263,10 +327,12 @@ $ git show v0.9             //显示标签信息
 $ git tag -a v0.1 -m “tag msg” 8s783a9
 //创建带有说明的标签，-a指定标签名，-m指定说明文字
 ```
+<a name="2--%E5%88%A0%E9%99%A4%E6%A0%87%E7%AD%BE"></a>
 #### 2.  删除标签
 ```c
 $ git tag -d v1.0       //删除标签
 ```
+<a name="3--%E6%8E%A8%E9%80%81%E6%A0%87%E7%AD%BE"></a>
 #### 3.  推送标签
 ```c
 $ git push origin v1.0      //推送标签v1.0到远程
@@ -274,17 +340,22 @@ $ git push origin --tags    //一次性推送尚未推送的标签到远程
 $ git push origin :refs/tags/tagname        //删除远程标签
 ```
 
+<a name="%E4%B8%83%E3%80%81--%E8%87%AA%E5%AE%9A%E4%B9%89git"></a>
 ### 七、  自定义Git
+<a name="1--%E5%BF%BD%E7%95%A5%E7%89%B9%E5%AE%9A%E6%96%87%E4%BB%B6"></a>
 #### 1.  忽略特定文件
 在.gitignore文件中指定不需要跟踪的文件列表。
 官方提供的列表目录：gitignore文件列表。
 
+<a name="%E5%85%AB%E3%80%81--%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"></a>
 ### 八、  常见问题分析
+<a name="1--%E6%8D%A2%E8%A1%8C%E7%AC%A6%E8%BD%AC%E6%8D%A2%E9%97%AE%E9%A2%98"></a>
 #### 1.  换行符转换问题
 Windows平台以CRLF为行结尾符，Linux/Unix平台以LF为行结尾符，在跨平台开发时可能会导致问题。
 $ git config --global core.autocrlf true/input/false
 该配置用于CRLF/LF的自动转换，设置为true时会在签出时将LF转换为CRLF，提交时将CRLF转换为LF。input表示提交时将CRLF转换成LF，签出时不转换。false表示保留原来的结束符。
 以目前的开发方式，建议在Windows上设置为false，然后尽量使用LF作为结束符开发。包括sourceinsight上设置结束符为LF。
+<a name="2--%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%97%B6%E6%8A%A5%E9%94%99"></a>
 #### 2.  拉取远程分支时报错
 使用命令：
 ```c
@@ -305,6 +376,7 @@ feature_01_signature   new (next fetch will store in remotes/origin)
 $ git remote update
 $ git fetch
 ```
+<a name="3--win%E4%B8%8Bbash%E9%80%9F%E5%BA%A6%E5%8F%98%E6%85%A2"></a>
 #### 3.  Win下bash速度变慢
 解决方案：关闭360安全卫士。
 
