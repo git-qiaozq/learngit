@@ -269,7 +269,7 @@ $ git merge name            //合并name分支到当前分支
 $ git merge --no-ff -m “commit msg” name    //禁止快速合并模式，将name分支合并到当前分支，可查看到合并记录
 $ git branch -d name        //删除name分支
 $ git branch -D name        //强制删除分支
-$git co --patch branch plugins/xxx/file.c  //merge单个文件
+$ git co --patch branch plugins/xxx/file.c  //merge单个文件
 //将branch分支中的file.c文件单独合并到当前分支，选择’a’确认，然后提交
 ```
 #### 2.  解决冲突
